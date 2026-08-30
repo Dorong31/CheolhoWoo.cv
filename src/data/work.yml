@@ -1,0 +1,22 @@
+# ── Selected Work (대표 결과물) ─────────────────────────────
+# 사이트에서 가장 먼저 읽히는 섹션. 3~4개만 두세요.
+#
+# 저장소 링크를 붙이려면 아래 주석처럼 links 를 추가하고,
+# 비공개 표시를 붙이려면 status: private 을 쓰면 됩니다.
+#   links:
+#     - label: GitHub
+#       url: https://github.com/USERNAME/repo
+- title:
+    ko: TNFD-RAG-Analyzer
+    en: TNFD-RAG-Analyzer
+  summary:
+    ko: 자연 관련 공시 문서를 TNFD 권고공시 항목으로 자동 분류·평가하는 RAG 파이프라인. 문단 단위 검색과 근거 인용을 함께 산출.
+    en: A RAG pipeline that classifies and scores nature-related disclosures against TNFD recommended disclosures, returning paragraph-level evidence with each judgment.
+  stack: [Python, RAG, LLM, TNFD]
+- title:
+    ko: 도시 환경기반시설 폭우 기후탄력성 평가 자동화 체계
+    en: Automated Climate Resilience Assessment for Urban Environmental Infrastructure
+  summary:
+    ko: 하수관망 및 유역 자료에서 SWMM inp를 자동 구축. 정책(LID) 시나리오와 기후변화 강우사상 등 시나리오별 FRI Curve 및 4R 산출 자동화.
+    en: Automatically builds SWMM inp files from sewer network and catchment data, and derives FRI curves and 4R metrics across LID policy and climate-change rainfall scenarios.
+  stack: [Python, PySWMM, SWMM5, Climate Change Resilience, Flood Resilience Index, 4R]

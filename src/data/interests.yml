@@ -1,0 +1,32 @@
+# ── 연구 관심사 ─────────────────────────────────────────────
+# 연구분야 4줄 + 활용 도구 1줄 구성. note는 한 줄 근거.
+- topic:
+    ko: 지속가능성 공시
+    en: Sustainability Disclosure
+  note:
+    ko: TCFD·TNFD 프레임워크, 공시 데이터의 구조화와 자동 분류
+    en: TCFD/TNFD frameworks, structuring and classifying disclosure data
+- topic:
+    ko: 환경영향평가·기후변화영향평가
+    en: Environmental & Climate Change Impact Assessment
+  note:
+    ko: 정책 및 제도 분석 및 데이터 기반 정책 제안
+    en: Policy and institutional analysis, data-driven policy recommendation
+- topic:
+    ko: 기후탄력성 및 기후변화 물리적 리스크 평가
+    en: Climate Resilience and Physical Climate Risk Assessment
+  note:
+    ko: 도시 지역 내수침수 모의 및 저영향개발기법 효과 모의
+    en: Urban pluvial flood simulation and low-impact development (LID) performance modeling
+- topic:
+    ko: 생물다양성
+    en: Biodiversity
+  note:
+    ko: 자연자본 의존·영향 경로와 금융 리스크 연계
+    en: Linking nature dependency and impact pathways to financial risk
+- topic:
+    ko: 활용 도구
+    en: Methods & Tools
+  note:
+    ko: Python·AI/LLM, GIS·원격탐사, SWMM 등 수문모형
+    en: Python and LLM tooling, GIS and remote sensing, SWMM and other hydrologic models

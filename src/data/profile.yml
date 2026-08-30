@@ -1,0 +1,29 @@
+# ── 기본 정보 ────────────────────────────────────────────────
+# {ko: ..., en: ...} 형태는 언어별 표기. en을 비우면 ko가 대신 나옵니다.
+name:
+  ko: 우철호
+  en: Woo Cheol Ho
+# 이름 아래에 세 줄로 표시됩니다 (소속 → 연구실 → 과정).
+affiliation:
+  ko: 고려대학교 환경생태공학과
+  en: Dept. of Environmental Science & Ecological Engineering, Korea University
+lab:
+  ko: 환경생태계획 및 정책학 연구실
+  en: Environmental Ecological Planning & Policy Studies Lab
+role:
+  ko: 석·박사통합과정
+  en: Integrated MS–PhD Candidate
+# 한 줄 소개. 비워두면 해당 영역이 통째로 사라집니다.
+tagline:
+  ko: ""
+  en: ""
+email: cheolho.woo31@gmail.com
+# 프로필 링크 버튼. 필요해지면 주석을 풀고 채우세요. 비워두면 이메일만 표시됩니다.
+links: []
+#  - label: ORCID
+#    url: https://orcid.org/0000-0000-0000-0000
+#  - label: Google Scholar
+#    url: https://scholar.google.com/citations?user=XXXX
+#  - label: GitHub
+#    url: https://github.com/USERNAME
+updated: 2026-08

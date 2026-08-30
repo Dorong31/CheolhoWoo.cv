@@ -1,0 +1,79 @@
+# ── 참여 연구과제 ───────────────────────────────────────────
+# 실참여 과제만. 다년차 동일 과제는 최초 시작연도 기준으로 한 번만 기재.
+# kind: rnd(R&D) | service(용역)  → 과제명 오른쪽에 딱지로 표시
+# featured: true 인 항목만 기본 노출
+#
+# ※ contribution(담당 업무)은 비워 두었습니다. 실제 맡은 일을 1~2줄씩 채우세요.
+#      contribution:
+#        - ko: 담당한 일
+#          en: What you did
+- title:
+    ko: 물리적 기후리스크 분석 및 재무적 영향 예측
+    en: "Physical Climate Risk Analysis and Financial Impact Projection"
+  funder:
+    ko: 한국환경산업기술원
+    en: "Korea Environmental Industry & Technology Institute (KEITI)"
+  period: 2026
+  kind: rnd
+  role:
+    ko: 참여연구원
+    en: Research Assistant
+  featured: true
+- title:
+    ko: 환경기반시설 기후탄력성 확보 평가·관리 기술
+    en: "Assessment and Management Technology for Climate Resilience of Environmental Infrastructure"
+  funder:
+    ko: 한국환경산업기술원
+    en: "Korea Environmental Industry & Technology Institute (KEITI)"
+  period: 2024–2026
+  kind: rnd
+  role:
+    ko: 참여연구원
+    en: Research Assistant
+  featured: true
+- title:
+    ko: TNFD 권고 글로벌 평가도구 방법론 기반 국내 적용형 평가도구 설계
+    en: "Designing a Korea-Adapted Assessment Tool Based on TNFD-Recommended Global Methodologies"
+  funder:
+    ko: 국립생태원
+    en: National Institute of Ecology
+  period: 2025–2026
+  kind: service
+  role:
+    ko: 참여연구원
+    en: Research Assistant
+  featured: true
+- title:
+    ko: DS 영향권 생태환경도 구축 및 TNFD 대응
+    en: "Ecological Environment Mapping for DS Sites and TNFD Response"
+  funder:
+    ko: 삼성전자
+    en: Samsung Electronics
+  period: 2024–2026
+  kind: service
+  role:
+    ko: 참여연구원
+    en: Research Assistant
+  featured: true
+- title:
+    ko: 제2차 제주특별자치도 도시생태현황지도 작성 용역
+    en: "2nd Urban Ecological Status Map of Jeju Special Self-Governing Province"
+  funder:
+    ko: 제주특별자치도청
+    en: Jeju Special Self-Governing Province
+  period: 2026–2027
+  kind: service
+  role:
+    ko: 참여연구원
+    en: Research Assistant
+- title:
+    ko: 기후위험 요인에 따른 부문별 리스크 정밀 평가 연구
+    en: "Detailed Sectoral Risk Assessment by Climate Hazard"
+  funder:
+    ko: 국립환경과학원
+    en: "National Institute of Environmental Research (NIER)"
+  period: 2024–2025
+  kind: service
+  role:
+    ko: 참여연구원
+    en: Research Assistant

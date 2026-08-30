@@ -1,0 +1,60 @@
+# ── 학회 발표 ───────────────────────────────────────────────
+# kind: oral | poster / scope: intl | domestic
+# place(개최지)는 선택. 비워두면 학회명만 표시됩니다.
+- year: "2026.06"
+  title:
+    ko: RAG 기반 대형 언어 모델을 활용한 국내 기업 TNFD 공시 현황 분석
+    en: "Analyzing TNFD disclosure practices of Korean firms with a RAG-based large language model"
+  venue:
+    ko: 한국기후변화학회 2026년 상반기학술대회
+    en: "The Korean Society of Climate Change Research, 2026 Spring Conference"
+  kind: oral
+  scope: domestic
+  featured: true
+- year: "2026.04"
+  title:
+    ko: 대형 언어 모델(LLM) 기반 RAG 시스템을 활용한 국내 기업 TNFD 공시 현황 자동 평가
+    en: "Automated assessment of Korean corporate TNFD disclosure using an LLM-based RAG system"
+  venue:
+    ko: 한국환경복원기술학회 2026년도 춘계학술대회
+    en: "The Korea Society of Environmental Restoration Technology, 2026 Spring Conference"
+  kind: oral
+  scope: domestic
+  featured: true
+- year: "2025.10"
+  title:
+    ko: 환경영향평가 온실가스 항목 분석을 통한 기후변화영향평가 대상 사업 분야 추가 방안 제안
+    en: "Expanding the scope of climate change impact assessment through analysis of greenhouse gas items in EIA"
+  venue:
+    ko: 2025년 한국환경영향평가학회 추계학술대회
+    en: "Korean Society of Environmental Impact Assessment, 2025 Autumn Conference"
+  kind: oral
+  scope: domestic
+  featured: true
+- year: "2025.04"
+  title:
+    ko: 그린인프라 적용에 따른 도시 지역 우수유출 저감효과 분석
+    en: "Stormwater runoff reduction in urban areas under green infrastructure application"
+  venue:
+    ko: 한국환경복원기술학회 2025년도 춘계학술대회
+    en: "The Korea Society of Environmental Restoration Technology, 2025 Spring Conference"
+  kind: oral
+  scope: domestic
+- year: "2024.11"
+  title:
+    ko: SWMM 모델을 활용한 그린인프라의 도시 지역 우수유출 저감효과 분석
+    en: "SWMM-based analysis of green infrastructure effects on urban stormwater runoff"
+  venue:
+    ko: 한국기후변화학회 2024년 하반기학술대회
+    en: "The Korean Society of Climate Change Research, 2024 Autumn Conference"
+  kind: oral
+  scope: domestic
+- year: "2024.06"
+  title:
+    ko: 기후변화영향평가에서의 도시홍수피해 저감대책 효과 평가 – SWMM을 중심으로
+    en: "Evaluating urban flood mitigation measures in climate change impact assessment: a SWMM approach"
+  venue:
+    ko: 한국기후변화학회 2024년 상반기학술대회
+    en: "The Korean Society of Climate Change Research, 2024 Spring Conference"
+  kind: oral
+  scope: domestic

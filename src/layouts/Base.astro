@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import { load, t, type Lang } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const profile = load('profile');
+const name = t(profile.name, lang);
+const role = t(profile.role, lang);
+const affil = t(profile.affiliation, lang);
+// 한 줄 소개가 비면 메타 설명은 직위·소속으로 대체합니다.
+const tagline = t(profile.tagline, lang) || `${role} · ${affil}`;
+
+const title = `${name} | ${lang === 'ko' ? '연구 포트폴리오' : 'Research Portfolio'}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(`${import.meta.env.BASE_URL}/files/og.png`.replace(/\/+/g, '/'), Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  jobTitle: role,
+  affiliation: { '@type': 'Organization', name: affil },
+  email: `mailto:${profile.email}`,
+  url: canonical,
+  sameAs: (profile.links ?? []).map((l: any) => l.url),
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={tagline} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={tagline} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      // 기본은 '대표 항목'만. JS가 없으면 전체가 그대로 노출되므로 색인에는 영향이 없습니다.
+      document.querySelectorAll('[data-list]').forEach((list) => {
+        if (!list.querySelector('.is-extra')) return;
+        list.dataset.mode = 'featured';
+        const btn = document.querySelector(`[data-toggle="${list.dataset.list}"]`);
+        if (!btn) return;
+        btn.hidden = false;
+        btn.addEventListener('click', () => {
+          const showAll = list.dataset.mode === 'featured';
+          list.dataset.mode = showAll ? 'all' : 'featured';
+          btn.textContent = showAll ? btn.dataset.less : btn.dataset.more;
+          btn.setAttribute('aria-expanded', String(showAll));
+        });
+      });
+    </script>
+  </body>
+</html>

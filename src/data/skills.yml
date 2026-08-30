@@ -1,0 +1,25 @@
+# ── 활용 도구 ───────────────────────────────────────────────
+# 그룹 순서가 화면 순서입니다.
+# use(설명)는 선택 — 생략하면 도구명만 표시됩니다.
+- group:
+    ko: 모델링
+    en: Modeling
+  items:
+    - name: SWMM / PySWMM
+      use:
+        ko: 하수관망 기반 자치구 단위 대규모 도시 내수침수 모의
+        en: District-scale urban pluvial flood simulation built on sewer network data
+- group:
+    ko: 데이터/문서 분석체계
+    en: Data & Document Analysis
+  items:
+    - name: LLM / RAG
+      use:
+        ko: 지속가능성 공시 문서의 공시 프레임워크 기반 분석 지원 체계
+        en: Framework-aligned analysis support for sustainability disclosure documents
+- group:
+    ko: 공간분석
+    en: Geospatial
+  items:
+    - name: QGIS / ArcGIS / GDAL
+    - name: geopandas / rasterio / xarray

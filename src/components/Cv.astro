@@ -1,0 +1,329 @@
+---
+import Section from './Section.astro';
+import { load, t, emphasize, type Lang } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ko = lang === 'ko';
+
+const profile = load('profile');
+const interests = load<any[]>('interests');
+const education = load<any[]>('education');
+const work = load<any[]>('work');
+const projects = load<any[]>('projects');
+const pubs = load<any[]>('pubs');
+const talks = load<any[]>('talks');
+const skills = load<any[]>('skills');
+const experience = load<any[]>('experience');
+const programs = load<any[]>('programs');
+const writing = load<any[]>('writing');
+
+
+const skillCount = skills.reduce((n, g) => n + (g.items?.length ?? 0), 0);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const other = ko ? `${base}/en/` : `${base}/`;
+
+const L = {
+  interests: ko ? '연구 관심사' : 'Research Interests',
+  education: ko ? '학력 및 경력' : 'Education & Experience',
+  work: ko ? '대표 결과물' : 'Selected Work',
+  projects: ko ? '참여 연구과제' : 'Research Projects',
+  pubs: ko ? '논문 실적' : 'Publications',
+  talks: ko ? '학회 발표' : 'Conference Presentations',
+  skills: ko ? '활용 도구' : 'Methods & Tools',
+  experience: ko ? '실무 경력' : 'Professional Experience',
+  programs: ko ? '연구지원사업' : 'Research Programs',
+  topic: ko ? '연구주제' : 'Topic',
+  writing: ko ? '기고·분석 글' : 'Writing',
+  more: ko ? '전체 보기' : 'Show all',
+  less: ko ? '대표 항목만' : 'Selected only',
+  print: ko ? '인쇄 / PDF 저장' : 'Print / Save as PDF',
+  updated: ko ? '최종 갱신' : 'Last updated',
+  role: ko ? '역할' : 'Role',
+  privateRepo: ko ? '비공개' : 'private',
+  rnd: ko ? 'R&D' : 'R&D',
+  service: ko ? '용역' : 'Commissioned',
+};
+
+const status: Record<string, { ko: string; en: string; cls: string }> = {
+  published: { ko: '게재', en: 'Published', cls: 'is-strong' },
+  accepted: { ko: '게재 확정', en: 'Accepted', cls: 'is-strong' },
+  'in-review': { ko: '심사 중', en: 'In review', cls: 'is-open' },
+  'in-prep': { ko: '작성 중', en: 'In preparation', cls: '' },
+};
+
+// 섹션 순서 = 좌측 목차 순서 = 번호(01, 02 …). 순서를 바꾸면 번호도 따라 바뀝니다.
+const nav = [
+  { id: 'interests', label: L.interests, n: interests.length, sw: 'var(--r5)' },
+  { id: 'education', label: L.education, n: education.length, sw: 'var(--r3)' },
+  { id: 'work', label: L.work, n: work.length, sw: 'var(--r5)' },
+  { id: 'projects', label: L.projects, n: projects.length, sw: 'var(--r5)' },
+  { id: 'publications', label: L.pubs, n: pubs.length, sw: 'var(--r4)' },
+  { id: 'talks', label: L.talks, n: talks.length, sw: 'var(--r4)' },
+  { id: 'programs', label: L.programs, n: programs.length, sw: 'var(--r4)' },
+  { id: 'skills', label: L.skills, n: skillCount, sw: 'var(--r3)' },
+  { id: 'experience', label: L.experience, n: experience.length, sw: 'var(--r3)' },
+  { id: 'writing', label: L.writing, n: writing.length, sw: 'var(--r2)' },
+].filter((s) => s.n > 0);
+
+const num: Record<string, string> = Object.fromEntries(
+  nav.map((s, i) => [s.id, String(i + 1).padStart(2, '0')])
+);
+---
+
+<div class="shell">
+  <nav class="legend" aria-label={ko ? '섹션 색인' : 'Section index'}>
+    <div class="legend-title">{ko ? '목차' : 'Index'}</div>
+    {
+      nav.map((s, i) => (
+        <a class="legend-row" href={`#${s.id}`}>
+          <span class="legend-swatch" style={`--sw:${s.sw}`} />
+          <span class="legend-num">{String(i + 1).padStart(2, '0')}</span>
+          <span class="legend-label">{s.label}</span>
+          <span class="legend-count">{s.n}</span>
+        </a>
+      ))
+    }
+    <div class="legend-foot">
+      <a href={other}>{ko ? 'ENGLISH' : '한국어'}</a><br />
+      <a href="#" onclick="window.print();return false;" class="print-hint">PDF</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <h1>{t(profile.name, lang)}</h1>
+      <div class="masthead-role">
+        <div>{t(profile.affiliation, lang)} · {t(profile.lab, lang)}</div>
+        <div><strong>{t(profile.role, lang)}</strong></div>
+      </div>
+      {t(profile.tagline, lang) && <p class="tagline">{t(profile.tagline, lang)}</p>}
+      <div class="meta-links">
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        {profile.links?.map((l: any) => <a href={l.url} rel="me noopener">{l.label}</a>)}
+      </div>
+    </header>
+
+    <Section id="interests" code={num.interests} title={L.interests} swatch="var(--r5)">
+      <div class="interests">
+        {
+          interests.map((it, i) => (
+            <div class="interest" style={`--sw:var(--r${Math.min(5, i + 1)})`}>
+              <div class="interest-bar" />
+              <div>
+                <strong>{t(it.topic, lang)}</strong>
+                <span>{t(it.note, lang)}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <Section id="education" code={num.education} title={L.education} swatch="var(--r3)" light>
+      {
+        education.map((e) => (
+          <div class="entry">
+            <div class="entry-year">{e.year}</div>
+            <div>
+              <div class="entry-title">{t(e.degree, lang)}</div>
+              <div class="entry-sub">{t(e.org, lang)}</div>
+              {t(e.note, lang) && <div class="entry-body">{t(e.note, lang)}</div>}
+            </div>
+          </div>
+        ))
+      }
+    </Section>
+
+    <Section id="work" code={num.work} title={L.work} swatch="var(--r5)">
+      {
+        work.map((w) => (
+          <article class="work">
+            <div class="work-head">
+              <h3>{t(w.title, lang)}</h3>
+              {w.status === 'private' && <span class="badge">{L.privateRepo}</span>}
+              {w.links?.map((l: any) => (
+                <a class="badge" href={l.url} rel="noopener">{l.label} ↗</a>
+              ))}
+            </div>
+            <p>{t(w.summary, lang)}</p>
+            {w.stack && (
+              <div class="tags">
+                {w.stack.map((s: string) => <span class="tag">{s}</span>)}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </Section>
+
+    <Section
+      id="projects" code={num.projects} title={L.projects} swatch="var(--r5)"
+      list="prj" more={L.more} less={L.less}
+    >
+      {
+        projects.map((p) => (
+          <div class={`entry${p.featured ? '' : ' is-extra'}`}>
+            <div class="entry-year">{p.period}</div>
+            <div>
+              <div class="entry-title title-row">
+                <span>{t(p.title, lang)}</span>
+                {p.kind === 'rnd' && <span class="badge is-strong">{L.rnd}</span>}
+                {p.kind === 'service' && <span class="badge">{L.service}</span>}
+              </div>
+              <div class="entry-sub">
+                {t(p.funder, lang)} · {L.role}: {t(p.role, lang)}
+              </div>
+              {p.contribution && (
+                <ul>
+                  {p.contribution.map((c: any) => <li>{t(c, lang)}</li>)}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </Section>
+
+    <Section
+      id="publications" code={num.publications} title={L.pubs} swatch="var(--r4)"
+      list="pub" more={L.more} less={L.less}
+    >
+      {
+        pubs.map((p) => (
+          <div class={`entry${p.featured ? '' : ' is-extra'}`}>
+            <div class="entry-year">{p.year}</div>
+            <div>
+              <div class="entry-title">
+                {p.doi ? (
+                  <a href={`https://doi.org/${p.doi}`} rel="noopener">{t(p.title, lang)}</a>
+                ) : (
+                  t(p.title, lang)
+                )}
+              </div>
+              <div class="entry-sub" set:html={emphasize(p.authors ?? '')} />
+              <div class="entry-sub"><em>{t(p.venue, lang)}</em></div>
+              <div class="tags">
+                {p.type && <span class="tag">{p.type}</span>}
+                {p.status && (
+                  <span class={`badge ${status[p.status]?.cls ?? ''}`}>
+                    {ko ? status[p.status]?.ko : status[p.status]?.en}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </Section>
+
+    <Section
+      id="talks" code={num.talks} title={L.talks} swatch="var(--r4)"
+      list="tlk" more={L.more} less={L.less}
+    >
+      {
+        talks.map((k) => (
+          <div class={`entry${k.featured ? '' : ' is-extra'}`}>
+            <div class="entry-year">{k.year}</div>
+            <div>
+              <div class="entry-title">{t(k.title, lang)}</div>
+              <div class="entry-sub">
+                {t(k.venue, lang)}{t(k.place, lang) && ` · ${t(k.place, lang)}`}
+              </div>
+              <div class="tags">
+                <span class="tag">{k.kind === 'poster' ? 'Poster' : 'Oral'}</span>
+                <span class="tag">{k.scope === 'intl' ? 'International' : 'Domestic'}</span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </Section>
+
+    {
+      programs.length > 0 && (
+        <Section id="programs" code={num.programs} title={L.programs} swatch="var(--r4)">
+          {programs.map((g) => (
+            <div class="entry">
+              <div class="entry-year">{g.period}</div>
+              <div>
+                <div class="entry-title">{t(g.title, lang)}</div>
+                <div class="entry-sub">{t(g.org, lang)}</div>
+                {t(g.topic, lang) && (
+                  <div class="entry-body">{L.topic}: {t(g.topic, lang)}</div>
+                )}
+              </div>
+            </div>
+          ))}
+        </Section>
+      )
+    }
+
+    <Section id="skills" code={num.skills} title={L.skills} swatch="var(--r3)" light>
+      {
+        skills.map((g) => (
+          <div class="skill-group">
+            <h3>{t(g.group, lang)}</h3>
+            {g.items.map((s: any) => (
+              <div class={`skill-row${t(s.use, lang) ? '' : ' is-bare'}`}>
+                <b>{s.name}</b>
+                {t(s.use, lang) && <span>{t(s.use, lang)}</span>}
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </Section>
+
+    {
+      experience.length > 0 && (
+        <Section id="experience" code={num.experience} title={L.experience} swatch="var(--r3)" light>
+          {experience.map((e) => (
+            <div class="entry">
+              <div class="entry-year">{e.period}</div>
+              <div>
+                <div class="entry-title">{t(e.title, lang)}</div>
+                <div class="entry-sub">
+                  {[t(e.org, lang), t(e.role, lang)].filter(Boolean).join(' · ')}
+                </div>
+                {e.tasks && (
+                  <ul>
+                    {e.tasks.map((k: any) => <li>{t(k, lang)}</li>)}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+        </Section>
+      )
+    }
+
+    {
+      writing.length > 0 && (
+        <Section id="writing" code={num.writing} title={L.writing} swatch="var(--r2)" light>
+          {writing.map((w) => (
+            <div class="entry">
+              <div class="entry-year">{w.date}</div>
+              <div>
+                <div class="entry-title">
+                  <a href={w.url} rel="noopener">{t(w.title, lang)}</a>
+                </div>
+                <div class="entry-sub">{w.outlet}</div>
+              </div>
+            </div>
+          ))}
+        </Section>
+      )
+    }
+
+    <footer class="footer">
+      <span>{L.updated} {profile.updated}</span>
+      <span>
+        <a href={other}>{ko ? 'ENGLISH' : '한국어'}</a>
+        {' · '}
+        <a href="#" onclick="window.print();return false;">{L.print}</a>
+      </span>
+    </footer>
+  </main>
+</div>

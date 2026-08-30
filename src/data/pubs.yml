@@ -1,0 +1,24 @@
+# ── 논문 실적 ───────────────────────────────────────────────
+# status: published | accepted | in-review | in-prep
+# type:   SCI | SCIE | SSCI | KCI | preprint | chapter
+# authors 는 문자열 한 줄. 본인 이름은 **굵게** 로 감쌉니다.
+- year: 2026
+  authors: "장유진, **우철호**, 김윤지, 전성우"
+  # 제목·게재지는 문자열 한 줄로 써도 되고, 영문 페이지용으로 {ko, en} 을 줘도 됩니다.
+  title:
+    ko: 할당부하량을 고려한 도심 지역에서의 비점오염 저감시설 비용-효율적 최적 배치
+    en: "Cost-effective optimization of BMP placement with consideration of allocated load"
+  venue: "Journal of Climate Change Research, 17(3), 483–492"
+  type: KCI
+  status: published
+  doi: "10.15531/KSCCR.2026.17.3.483"
+  featured: true
+- year: 2026
+  authors: "**우철호**, 성현찬, 김서현, 전성우, 김윤지"
+  title: "환경영향평가 온실가스 항목 분석을 통한 기후변화영향평가 대상 사업 확대 방안 제안"
+  venue:
+    ko: 환경영향평가 (한국환경영향평가학회)
+    en: "Journal of Environmental Impact Assessment (Korean Society of Environmental Impact Assessment)"
+  type: KCI
+  status: accepted
+  featured: true

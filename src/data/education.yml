@@ -1,0 +1,29 @@
+# ── 학력 및 경력 ────────────────────────────────────────────
+# degree = 굵은 첫 줄, org = 둘째 줄, note = 회색 셋째 줄
+- year: "2024.03–"
+  degree:
+    ko: 석·박사통합과정 (재학)
+    en: Integrated MS–PhD (in progress)
+  org:
+    ko: 고려대학교 환경생태공학과
+    en: Dept. of Environmental Science & Ecological Engineering, Korea University
+  note:
+    ko: 지도교수 전성우
+    en: Advisor Prof. Seong Woo Jeon
+- year: "2021.12–2024.02"
+  degree:
+    ko: EY한영
+    en: EY Hanyoung
+  org:
+    ko: 기후변화 및 지속가능경영 서비스
+    en: Climate Change and Sustainability Services (CCaSS)
+  note:
+    ko: 컨설턴트
+    en: Consultant
+- year: "2022.02"
+  degree:
+    ko: 학사
+    en: B.S.
+  org:
+    ko: 고려대학교 환경생태공학부
+    en: Division of Environmental Science & Ecological Engineering, Korea University

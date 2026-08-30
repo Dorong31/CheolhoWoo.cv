@@ -1,0 +1,40 @@
+---
+interface Props {
+  id: string;
+  code: string;
+  title: string;
+  swatch: string;
+  note?: string;
+  /** 대표/전체 토글을 붙일 때 사용하는 목록 키 */
+  list?: string;
+  more?: string;
+  less?: string;
+  /** 밝은 스와치일 때 코드 라벨 글자를 어둡게 (대비 확보) */
+  light?: boolean;
+}
+const { id, code, title, swatch, note, list, more, less, light } = Astro.props;
+---
+
+<section class="section" id={id} style={`--sw:${swatch}`}>
+  <div class="section-head">
+    <span class={`section-code${light ? ' is-light' : ''}`}>{code}</span>
+    <h2>{title}</h2>
+    {note && <span class="section-note">{note}</span>}
+    {
+      list && (
+        <button
+          class="toggle"
+          type="button"
+          hidden
+          aria-expanded="false"
+          data-toggle={list}
+          data-more={more}
+          data-less={less}
+        >
+          {more}
+        </button>
+      )
+    }
+  </div>
+  {list ? <div data-list={list}><slot /></div> : <slot />}
+</section>
