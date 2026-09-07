@@ -33,7 +33,11 @@
   --main-w: 53.5rem;
   --toc-w: 10.5rem;
   --shell-gap: clamp(1.5rem, 3vw, 2.75rem);
-  /* 상단 고정 행 높이. 목차·섹션 제목의 sticky 오프셋 기준값입니다. */
+  /* --topbar-min: 상단 고정 행의 최소 높이(고정값).
+     --topbar-h  : 목차·섹션 제목의 sticky 오프셋. 좁은 화면에서 행이 두 줄로
+                   접히면 값이 달라지므로 Base.astro가 실제 높이로 갱신합니다.
+                   JS가 없을 때를 위한 기본값은 한 줄 높이. */
+  --topbar-min: 2.9rem;
   --topbar-h: 2.9rem;
 
   --gap: clamp(2.75rem, 6vw, 4.5rem);
@@ -87,17 +91,25 @@ a:focus-visible {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
-  backdrop-filter: saturate(1.4) blur(8px);
-  -webkit-backdrop-filter: saturate(1.4) blur(8px);
+  /* 아래 내용이 비쳐 보이면 글자가 읽히지 않으므로 불투명하게 둡니다. */
+  background: var(--paper);
   border-bottom: 1px solid var(--rule);
 }
-/* 본문 칼럼과 같은 폭·같은 중심 → 이메일 행이 본문 바로 위에 정렬됩니다. */
+/* .shell과 같은 3열 격자를 그대로 써서 가운데 열(본문)에 정확히 맞춥니다. */
 .topbar-inner {
-  max-width: var(--main-w);
-  margin: 0 auto;
-  min-height: var(--topbar-h);
-  padding: 0.3rem clamp(1.1rem, 3vw, 2rem);
+  padding: 0 clamp(1.1rem, 3vw, 2rem);
+  display: grid;
+  grid-template-columns:
+    minmax(var(--toc-w), 1fr)
+    minmax(0, var(--main-w))
+    minmax(var(--toc-w), 1fr);
+  column-gap: var(--shell-gap);
+}
+.topbar-row {
+  grid-column: 2;
+  min-width: 0;
+  min-height: var(--topbar-min);
+  padding: 0.3rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -278,6 +290,7 @@ a:focus-visible {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
+  padding-top: 0.45rem;
   padding-bottom: 0.45rem;
   border-bottom: 1px solid var(--ink);
   margin-bottom: 1.3rem;
@@ -493,6 +506,11 @@ a:focus-visible {
     background: var(--card);
   }
   .legend-label { font-size: 0.76rem; overflow: visible; }
+  .topbar-inner {
+    display: block;
+    max-width: var(--main-w);
+    margin: 0 auto;
+  }
   .topbar-name span { display: none; }
   .topbar-links { font-size: 0.7rem; }
   .entry { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }

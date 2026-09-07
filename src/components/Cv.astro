@@ -78,6 +78,7 @@ const otherLinks = (profile.links ?? []).filter((l: any) => l !== linkedin);
 
 <header class="topbar">
   <div class="topbar-inner">
+   <div class="topbar-row">
     <a class="topbar-name" href="#top">
       {t(profile.name, lang)}
       <span>{ko ? '연구 포트폴리오' : 'Research Portfolio'}</span>
@@ -108,6 +109,7 @@ const otherLinks = (profile.links ?? []).filter((l: any) => l !== linkedin);
       {otherLinks.map((l: any) => <a href={l.url} rel="me noopener">{l.label}</a>)}
       <a href={other} class="topbar-lang">{ko ? 'EN' : 'KO'}</a>
     </nav>
+   </div>
   </div>
 </header>
 
