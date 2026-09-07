@@ -48,6 +48,20 @@ const jsonLd = {
   <body>
     <slot />
     <script is:inline>
+      // 상단 고정 행이 두 줄로 접히면 높이가 달라집니다. 실제 높이를 --topbar-h에
+      // 되돌려 주어야 목차·섹션 제목이 그 아래에 정확히 붙습니다.
+      (function () {
+        const bar = document.querySelector('.topbar');
+        if (!bar) return;
+        const sync = () =>
+          document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight + 'px');
+        sync();
+        // 웹폰트가 늦게 적용되면 줄바꿈이 달라지므로 한 번 더 맞춥니다.
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+        if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
+        else addEventListener('resize', sync);
+      })();
+
       // 기본은 '대표 항목'만. JS가 없으면 전체가 그대로 노출되므로 색인에는 영향이 없습니다.
       document.querySelectorAll('[data-list]').forEach((list) => {
         if (!list.querySelector('.is-extra')) return;

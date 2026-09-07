@@ -70,9 +70,67 @@ const nav = [
 const num: Record<string, string> = Object.fromEntries(
   nav.map((s, i) => [s.id, String(i + 1).padStart(2, '0')])
 );
+
+// 상단 고정 행: LinkedIn만 아이콘을 붙이므로 links에서 따로 골라냅니다.
+const linkedin = (profile.links ?? []).find((l: any) => /linkedin\.com/i.test(l.url));
+const otherLinks = (profile.links ?? []).filter((l: any) => l !== linkedin);
 ---
 
-<div class="shell">
+<header class="topbar">
+  <div class="topbar-inner">
+   <div class="topbar-row">
+    <a class="topbar-name" href="#top">
+      {t(profile.name, lang)}
+      <span>{ko ? '연구 포트폴리오' : 'Research Portfolio'}</span>
+    </a>
+    <nav class="topbar-links" aria-label={ko ? '연락처' : 'Contact'}>
+      <a href={`mailto:${profile.email}`}>
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linejoin="round"
+            d="M3 6h18v12H3z M3 6.5l9 6.5 9-6.5"
+          />
+        </svg>
+        <span>{profile.email}</span>
+      </a>
+      {
+        linkedin && (
+          <a href={linkedin.url} rel="me noopener" target="_blank">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        )
+      }
+      {otherLinks.map((l: any) => <a href={l.url} rel="me noopener">{l.label}</a>)}
+      <a href={other} class="topbar-lang">{ko ? 'EN' : 'KO'}</a>
+      <a
+        href="#"
+        class="is-icon"
+        onclick="window.print();return false;"
+        title={L.print}
+        aria-label={L.print}
+      >
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linejoin="round"
+            d="M7 8V3h10v5 M7 18H4v-7h16v7h-3 M7 15h10v6H7z"
+          />
+        </svg>
+      </a>
+    </nav>
+   </div>
+  </div>
+</header>
+
+<div class="shell" id="top">
   <nav class="legend" aria-label={ko ? '섹션 색인' : 'Section index'}>
     <div class="legend-title">{ko ? '목차' : 'Index'}</div>
     {
