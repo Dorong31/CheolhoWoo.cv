@@ -108,6 +108,23 @@ const otherLinks = (profile.links ?? []).filter((l: any) => l !== linkedin);
       }
       {otherLinks.map((l: any) => <a href={l.url} rel="me noopener">{l.label}</a>)}
       <a href={other} class="topbar-lang">{ko ? 'EN' : 'KO'}</a>
+      <a
+        href="#"
+        class="is-icon"
+        onclick="window.print();return false;"
+        title={L.print}
+        aria-label={L.print}
+      >
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linejoin="round"
+            d="M7 8V3h10v5 M7 18H4v-7h16v7h-3 M7 15h10v6H7z"
+          />
+        </svg>
+      </a>
     </nav>
    </div>
   </div>

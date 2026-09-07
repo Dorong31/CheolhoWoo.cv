@@ -120,7 +120,7 @@ a:focus-visible {
   border-bottom: none;
   color: var(--ink);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
@@ -158,6 +158,9 @@ a:focus-visible {
   flex: none;
 }
 .topbar-lang { letter-spacing: 0.08em; }
+/* 아이콘만 담는 정사각 상자 — 글자가 없어 좌우 여백을 줄입니다. */
+.topbar-links .is-icon { padding: 0.16rem 0.34rem; }
+.topbar-links .is-icon .ic { width: 0.95rem; height: 0.95rem; }
 
 /* ── 셸: 좌측 색인 + 본문 ───────────────────────────────── */
 /* 3열 격자(여백 · 본문 · 여백). 양 옆 열이 같은 비율로 늘어나므로
@@ -257,7 +260,8 @@ a:focus-visible {
   font-size: 1rem;
   line-height: 1.55;
   color: var(--muted);
-  margin: 0 0 1.1rem;
+  /* 아래 여백은 연락처 상자가 보일 때(인쇄)만 필요하므로 .meta-links가 갖습니다. */
+  margin: 0;
 }
 .masthead-role strong { color: var(--ink); font-weight: 600; }
 .tagline {
@@ -268,8 +272,11 @@ a:focus-visible {
   padding-left: 0.9rem;
   border-left: 2px solid var(--r3);
 }
+/* 이메일·LinkedIn은 상단 고정 행에 항상 떠 있으므로 화면에서는 감춥니다.
+   고정 행은 인쇄에서 빠지므로, 인쇄본에서는 아래 @media print가 다시 켭니다. */
 .meta-links {
-  display: flex;
+  display: none;
+  margin-top: 1.1rem;
   flex-wrap: wrap;
   gap: 0.4rem 0.5rem;
   font-family: var(--mono);
@@ -497,29 +504,10 @@ a:focus-visible {
     margin: 0 auto;
   }
   .shell > main { grid-column: 1; }
-  .legend {
-    grid-column: 1;
-    justify-self: stretch;
-    width: auto;
-    position: static;
-    display: flex;
-    gap: 0.4rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
-    -webkit-overflow-scrolling: touch;
-  }
-  .legend-title, .legend-foot, .legend-count, .legend-swatch { display: none; }
-  .legend-row {
-    grid-template-columns: auto auto;
-    gap: 0.3rem;
-    padding: 0.2rem 0.5rem;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    white-space: nowrap;
-    background: var(--card);
-  }
-  .legend-label { font-size: 0.76rem; overflow: visible; }
+  /* 좁은 화면에서는 목차를 감춥니다. 고정 행(좁으면 두 줄) + 목차 + 섹션 제목이
+     모두 붙어 있으면 세로 공간을 너무 먹고, 언어 전환·인쇄는 고정 행에 있어
+     목차가 없어도 잃는 기능이 없습니다. 현재 위치는 고정된 섹션 제목이 알려줍니다. */
+  .legend { display: none; }
   .topbar-inner {
     display: block;
     max-width: var(--main-w);
@@ -527,6 +515,29 @@ a:focus-visible {
   }
   .topbar-name span { display: none; }
   .topbar-links { font-size: 0.7rem; }
+}
+
+/* 아주 좁은 화면: 칩이 세 줄로 흩어지지 않도록 조금씩 줄입니다. */
+@media (max-width: 620px) {
+  .topbar-links {
+    font-size: 0.66rem;
+    gap: 0.25rem 0.3rem;
+  }
+  .topbar-links a {
+    padding: 0.14rem 0.38rem;
+    gap: 0.26rem;
+  }
+  .topbar-links .ic { width: 0.85rem; height: 0.85rem; }
+  .topbar-links .is-icon { padding: 0.14rem 0.3rem; }
+  /* 좌우 여백도 함께 줄입니다. 고정 행과 본문이 계속 같은 선에 서도록 둘 다 적용. */
+  .shell,
+  .topbar-inner {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+}
+
+@media (max-width: 1040px) {
   .entry { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
   .entry-year { padding-top: 0; }
   .skill-row { grid-template-columns: minmax(0, 1fr); }
@@ -538,6 +549,7 @@ a:focus-visible {
   body { font-size: 10.2pt; line-height: 1.45; }
   .shell { display: block; max-width: none; margin: 0; padding: 0; }
   .legend, .toggle, .print-hint, .topbar { display: none !important; }
+  .meta-links { display: flex; }
   [data-mode='featured'] .is-extra { display: block; }
   .section { margin-top: 1.1rem; padding-bottom: 0; break-inside: avoid-page; }
   .section:first-of-type { margin-top: 1.1rem; }
