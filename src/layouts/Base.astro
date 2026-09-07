@@ -56,6 +56,8 @@ const jsonLd = {
         const sync = () =>
           document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight + 'px');
         sync();
+        // 웹폰트가 늦게 적용되면 줄바꿈이 달라지므로 한 번 더 맞춥니다.
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
         if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
         else addEventListener('resize', sync);
       })();
