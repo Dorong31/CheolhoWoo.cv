@@ -285,15 +285,30 @@ a:focus-visible {
 .meta-links a:hover { color: var(--accent); border-color: var(--r3); }
 
 /* ── 섹션 ───────────────────────────────────────────────── */
-.section { margin-top: var(--gap); }
+/* 섹션 사이 간격을 .section-body의 padding-bottom으로 둡니다.
+   sticky는 부모의 '콘텐츠 상자' 안에서만 붙으므로, 간격을 자식 안에 넣어야
+   섹션 상자가 다음 제목 바로 앞까지 이어집니다. 그 덕분에 sticky 제목이
+   간격 구간 내내 붙어 있다가, 다음 제목이 올라오는 순간 밀려 올라갑니다. */
+.section { padding-bottom: 0; }
+.section:first-of-type { margin-top: var(--gap); }
 .section-head {
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: 20;
+  background: var(--paper);
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
   padding-top: 0.45rem;
   padding-bottom: 0.45rem;
   border-bottom: 1px solid var(--ink);
-  margin-bottom: 1.3rem;
+  /* margin-bottom을 두면 sticky 가둠 상자가 그만큼 좁아져 제목이 먼저 떠납니다.
+     제목과 본문 사이 간격은 .section-body 쪽에서 줍니다. */
+  margin-bottom: 0;
+}
+.section-body {
+  padding-top: 1.3rem;
+  padding-bottom: var(--gap);
 }
 .section-code {
   font-family: var(--mono);
@@ -462,7 +477,6 @@ a:focus-visible {
 }
 
 .footer {
-  margin-top: var(--gap);
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
   font-family: var(--mono);
@@ -525,7 +539,11 @@ a:focus-visible {
   .shell { display: block; max-width: none; margin: 0; padding: 0; }
   .legend, .toggle, .print-hint, .topbar { display: none !important; }
   [data-mode='featured'] .is-extra { display: block; }
-  .section { margin-top: 1.1rem; break-inside: avoid-page; }
+  .section { margin-top: 1.1rem; padding-bottom: 0; break-inside: avoid-page; }
+  .section:first-of-type { margin-top: 1.1rem; }
+  .section-body { padding: 0.6rem 0 0; }
+  .section-head { position: static; background: none; }
+  .footer { margin-top: 1.1rem; }
   .entry, .work, .skill-group { break-inside: avoid; }
   a { color: var(--ink); border-bottom: none; }
   .masthead h1 { font-size: 22pt; }

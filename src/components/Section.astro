@@ -36,5 +36,7 @@ const { id, code, title, swatch, note, list, more, less, light } = Astro.props;
       )
     }
   </div>
-  {list ? <div data-list={list}><slot /></div> : <slot />}
+  <div class="section-body">
+    {list ? <div data-list={list}><slot /></div> : <slot />}
+  </div>
 </section>
