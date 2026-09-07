@@ -18,8 +18,10 @@ tagline:
   ko: ""
   en: ""
 email: cheolho.woo31@gmail.com
-# 프로필 링크 버튼. 필요해지면 주석을 풀고 채우세요. 비워두면 이메일만 표시됩니다.
-links: []
+# 프로필 링크 버튼. 상단 고정 행에도 함께 나옵니다(LinkedIn은 아이콘 포함).
+links:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/cheolho-woo-724948222/
 #  - label: ORCID
 #    url: https://orcid.org/0000-0000-0000-0000
 #  - label: Google Scholar
